@@ -1,0 +1,29 @@
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mackdo Storage</title>
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center text-red-600">Product Entry</h2>
+        
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            {% for field in form %}
+            <div>
+                <label class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                <!-- Tailstyled Input Fields -->
+                <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" 
+                       class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-red-500 focus:border-red-500">
+            </div>
+            {% endfor %}
+            
+            <button type="submit" class="w-full bg-red-600 text-white font-bold py-2 px-4 rounded-md hover:bg-red-700 transition">
+                Submit to Database
+            </button>
+        </form>
+    </div>
+</body>
+</html>
